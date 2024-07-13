@@ -21,5 +21,7 @@ namespace TEST_ADO_MVC.Models
         public string description { get; set; }
         [Required]
         public string name_employee { get; set; }
+        [Required]
+        public List<Employee> employees { get; set;}
     }
 }
