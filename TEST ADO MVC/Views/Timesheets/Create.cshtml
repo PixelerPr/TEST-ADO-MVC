@@ -27,10 +27,13 @@
     <div class="mb-3">
         <label class="form-label">Причина отсутствия</label>
         <select asp-for="reason">
-@*            @for(int i = 0;i<4;i++)
-            {
-                <option selected="selected" value="@i">@i</option>
-            }*@
+            
+                
+@*                @foreach (var employee in Model.employees)
+                {
+                    <option selected="selected" value="@employee.id">@employee.last_name @employee.first_name</option>
+                }*@
+            
             <option selected="selected" disabled="disabled">Выберите причину </option>
             <option selected="selected" value="1">Отпуск</option>
             <option selected="selected" value="2">Больничный</option>

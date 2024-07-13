@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
 using TEST_ADO_MVC.DAL;
 using TEST_ADO_MVC.Models;
 
@@ -19,6 +20,7 @@ namespace TEST_ADO_MVC.Controllers
             try
             {
                 timesheets = _dal.GetAll();//Вызывается метод, который заполняет таблицу на форме из БД.
+
             }
             catch (Exception ex)
             {
@@ -32,6 +34,7 @@ namespace TEST_ADO_MVC.Controllers
         [HttpGet]
         public IActionResult Create()
         {
+
             return View();
         }
         [HttpPost]

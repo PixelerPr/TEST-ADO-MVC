@@ -50,12 +50,34 @@ namespace TEST_ADO_MVC.DAL
             return timesheetsList;
         }
 
+        public List<Employee> GetEmployees()//Метод получения списка сотрудников.
+        {
+            List<Employee> employeesList = new List<Employee>();
+            using (connection = new SqlConnection(GetConnectionString()))
+            {
+                command = connection.CreateCommand();
+                command.CommandType = CommandType.StoredProcedure;
+                command.CommandText = "[dbo].[Get_Emp]";
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    Employee employee = new Employee();
+                    employee.id = Convert.ToInt32(reader["id"]);
+                    employee.last_name = reader["last_name"].ToString();
+                    employee.first_name = reader["first_name"].ToString();
+                    employeesList.Add(employee);
+                }
+                connection.Close();
+            }
+            return employeesList;
+        }
+
         public bool Insert(Timesheets model)//Метод вставки данных в основную таблицу БД.
         {
             int loc_s = 0;
             using (connection = new SqlConnection(GetConnectionString()))
             {
-                Debug.WriteLine(model.discounted + "AAAAAAAAAAAAAA");
                 command = connection.CreateCommand();
                 command.CommandType = CommandType.StoredProcedure;
                 command.CommandText = "[dbo].[Insert_TH]";
