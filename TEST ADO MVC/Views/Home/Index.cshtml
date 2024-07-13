@@ -1,0 +1,60 @@
+﻿@model List<TEST_ADO_MVC.Models.Timesheets>
+
+@{
+    ViewData["Title"] = "Timesheets Details";
+    var errorMessage = TempData["errorMessage"]?.ToString();
+}
+<h3>@ViewData["Title"]</h3>
+<hr />
+<form>
+    <button asp-action="Create" asp-controller="Timesheets" class="btn btn-primary">Создать запись</button>
+    <table class="table table-responsive table-hover">
+        <thead>
+            <tr class="table-active">
+                <th>Идентификатор</th>
+                <th>Сотрудник</th>
+                <th>Причина отсутствия</th>
+                <th>Дата начала</th>
+                <th>Продолжительность(раб.дней)</th>
+                <th>Учтено при оплате</th>
+                <th>Комментарий</th>
+                <th>Действия</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if(Model != null && Model.Any())
+            {
+                @foreach(var timesheets in Model)
+                {
+                    <tr>
+                        <td>@timesheets.id</td>
+                        <td>@timesheets.employee</td>
+                        <td>@timesheets.reason</td>
+                        <td>@timesheets.start_date.ToString()</td>
+                        <td>@timesheets.duration</td>
+                        <td>@timesheets.discounted</td>
+                        <td>@timesheets.description</td>
+                        <td>
+                            <div class="btn-group btn-group-sm">
+                                <a asp-controller="Timesheets" asp-action="Edit" asp-route-id="@timesheets.id" class="btn
+                                btn-primary">Edit</a>
+                                <a asp-controller="Timesheets" asp-action="Delete" asp-route-id="@timesheets.id" class="btn
+                                btn-danger">Delete</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="8">
+                        <div>
+                            Нет ни одной записи!
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</form>

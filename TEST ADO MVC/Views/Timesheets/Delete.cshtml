@@ -1,0 +1,48 @@
+﻿@model TEST_ADO_MVC.Models.Timesheets
+
+@{
+    ViewData["Title"] = "Удалить запись";
+    var errorMessage = TempData["errorMessage"]?.ToString();
+}
+<h3>ViewData["Title"]</h3>
+<hr />
+@if (!string.IsNullOrWhiteSpace(errorMessage))
+{
+    <div class="alert alert-danger">
+        <b>Error : </b>@errorMessage
+        <button type="button" class="btn-close float-end" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+<form action="Delete" method="post">
+    <div class="mb-3">
+        <label class="form-label">Идентификатор</label>
+        <input type="text" class="form-control" asp-for="id" readonly />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Сотрудник</label>
+        <input type="text" class="form-control" asp-for="employee" readonly />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Причина отсутствия</label>
+        <input type="text" class="form-control" asp-for="reason" readonly />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Дата начала</label>
+        <input type="date" class="form-control" asp-for="start_date" readonly />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Продолжительность(раб.дней)</label>
+        <input type="text" class="form-control" asp-for="duration" readonly />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Учтено при оплате</label>
+        <input type="text" class="form-control" asp-for="discounted" readonly />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Комментарий</label>
+        <input type="text" class="form-control" asp-for="description" readonly />
+    </div>
+    <div class="d-grid">
+        <button type="submit" class="btn btn-danger">Удалить</button>
+    </div>
+</form>

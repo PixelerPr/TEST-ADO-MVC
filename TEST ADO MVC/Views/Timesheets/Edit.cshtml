@@ -1,0 +1,60 @@
+﻿@model TEST_ADO_MVC.Models.Timesheets
+
+@{
+    ViewData["Title"] = "Изменить запись";
+    var errorMessage = TempData["errorMessage"]?.ToString();
+}
+<h3>ViewData["Title"]</h3>
+<hr />
+@if (!string.IsNullOrWhiteSpace(errorMessage))
+{
+            <div class="alert alert-danger">
+                <b>Error : </b>@errorMessage
+                <button type="button" class="btn-close float-end" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+}
+<form action="Edit" method="post">
+    <div class="mb-3">
+        <label class="form-label">Идентификатор</label>
+        <input type="text" class="form-control" asp-for="id" readonly />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Сотрудник</label>
+        <input type="text" class="form-control" asp-for="employee" />
+        <span asp-validation-for="employee" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Причина отсутствия</label>
+        <input type="text" class="form-control" asp-for="reason" />
+        <span asp-validation-for="reason" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Дата начала</label>
+        <input type="date" class="form-control" asp-for="start_date" />
+        <span asp-validation-for="start_date" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Продолжительность(раб.дней)</label>
+        <input type="text" class="form-control" asp-for="duration" />
+        <span asp-validation-for="duration" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Учтено при оплате</label>
+        <input type="text" class="form-control" asp-for="discounted" />
+        <input type="checkbox" class="form-control" asp-for="discounted" />
+        <span asp-validation-for="discounted" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Комментарий</label>
+        <input type="text" class="form-control" asp-for="description" />
+        <span asp-validation-for="description" class="text-danger"></span>
+    </div>
+    <div class="d-grid">
+        <button type="submit" class="btn btn-success">Изменить</button>
+    </div>
+</form>
+@section Scripts{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
